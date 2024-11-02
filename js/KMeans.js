@@ -18,7 +18,8 @@ const KMeansModel = class {
             this.kmeans = new _2DKMeans(k, this.data)
             this.isTrained = true
         } catch (error) {
-            alert('Error in training KMeans')
+            console.log(error)
+            alert('Error training KMeans')
         }
     }
 
@@ -38,7 +39,7 @@ const KMeansModel = class {
             this.isPredict = true
         } catch (error) {
             console.log(error)
-            alert('Error in predict KMeans')
+            alert('Error predict KMeans')
         }
     }
 

@@ -7,7 +7,6 @@ const NaiveBayesModel = class {
     train = (data) => {
         try {
             console.log('Training NaiveBayes')
-
             this.names = [...new Set(data.flatMap(Object.keys))];
             const values = {}
             this.names.forEach(item1 => {
@@ -16,7 +15,6 @@ const NaiveBayesModel = class {
                     values[item1].push(item2[item1])
                 })
             })
-
             this.names.forEach(item1 => {
                 this.naive.insertCause(item1, values[item1]);
             })
@@ -27,7 +25,6 @@ const NaiveBayesModel = class {
                 table += `<th>${item}</th>`;
             })
             table += "</tr>"
-
             for(let i = 0; i < data.length; i ++) {
                 table += "<tr>"
                 this.names.forEach(item1 => {
@@ -35,7 +32,6 @@ const NaiveBayesModel = class {
                 })
                 table += "</tr>"
             }
-
             document.getElementById("tabla").innerHTML = table
 
             let drop = "";
@@ -46,7 +42,6 @@ const NaiveBayesModel = class {
 
             let event_causes = "<table>";
             let causes = this.naive.causes;
-
             for (let index = 0; index < causes.length; index ++) {
                 event_causes += `<tr><td><label id=label_${index + 1}>${causes[index][0]}</label><td>`;
                 event_causes += `<td><select class="form-select" name="cause" id="cause${index + 1}_dropdown\">`;
@@ -59,7 +54,8 @@ const NaiveBayesModel = class {
             }
             document.getElementById("events").innerHTML = event_causes;
         } catch (error) {
-            
+            console.log(error)
+            alert('Error training NaiveBayes')
         }
     }
 

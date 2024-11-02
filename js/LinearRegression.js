@@ -14,19 +14,17 @@ const LinearRegressionModel = class {
             this.xValues = data.map(item => parseFloat(item.EjeX));
             this.yValues = data.map(item => parseFloat(item.EjeY));
             document.getElementById('data_training').innerHTML = `<p>X: [${this.xValues.join(', ')}]</p><p>Y: [${this.yValues.join(', ')}]</p>`
-            // ENTRENAMIENTO
 			this.linearRegresion.fit(this.xValues, this.yValues);
-
             this.isTrained = true
         } catch (error) {
-            alert('Error in training LinearRegression')
+            console.log(error)
+            alert('Error training LinearRegression')
         }
     }
-    
+
     predict = () => {
         try {
             console.log('Predict LinearRegression')
-
             this.result = this.linearRegresion.predict(this.xValues);
             document.getElementById('predict_result').innerHTML = `<center><table id="displayTable" class="table table-striped table-bordered table-hover text-center"><tr><th>X Base</th><th>Y Predicted</th><th>ERROR %</th></tr></table></center>`
 			let displayTable = document.getElementById("displayTable");
@@ -51,11 +49,10 @@ const LinearRegressionModel = class {
 				row.appendChild(errCol);
 				displayTable.appendChild(row);
 			}
-
             this.isPredict = true
         } catch (error) {
             console.log(error)
-            alert('Error in predict LinearRegression')
+            alert('Error predict LinearRegression')
         }
     }
 
@@ -67,24 +64,18 @@ const LinearRegressionModel = class {
 			const x = this.xValues[i];
 			graphDataSet.push([x.toString(), this.yValues[i], this.result[i]]);
 		}
-
 		google.charts.load("current", { packages: ["corechart"] });
-
         const drawChart = () => {
 			var data = google.visualization.arrayToDataTable(graphDataSet);
-
 			var options = {
 				title: "Linear Regression",
 				legend: { position: "bottom" },
 			};
-
 			var chart = new google.visualization.LineChart(
 				document.getElementById("curve_chart")
 			);
-
 			chart.draw(data, options);
 		}
-
 		google.charts.setOnLoadCallback(drawChart);
     }
 
