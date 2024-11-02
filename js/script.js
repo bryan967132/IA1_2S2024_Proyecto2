@@ -4,7 +4,68 @@ const getSelectedOption = () => {
 }
 
 const updateModelName = () => {
-    document.getElementById('model_name').textContent = getSelectedOption()
+    const modelSelect = getSelectedOption()
+    document.getElementById('model_name').textContent = modelSelect
+    models[modelSelect].reset()
+    sectionResults()
+    if(modelSelect !== 'Naive Bayes') {
+        document.getElementById('actions').innerHTML = `<h3>Actions</h3><button type="button" onclick="train()" class="btn btn-primary">Train</button>`
+    } else {
+        document.getElementById('actions').innerHTML = ``
+        if(contentFile) {
+            models[modelSelect].train(contentFile)
+        }
+    }
+}
+
+const sectionResults = () => {
+    document.getElementById('section_results').innerHTML = getSelectedOption() !== 'Naive Bayes' ? `<div class="row mt-5 p-4">
+            <div class="col-md-12 text-center">
+            <h4 class="text-primary">Training</h4>
+        </div>
+        <div class="col-md-12 text-center" id="data_training">
+            <p>No results yet!</p>
+        </div>
+        </div>
+        <div class="row mt-5 p-4">
+            <div class="col-md-12 text-center">
+                <h4 class="text-primary">Predict</h4>
+            </div>
+            <div class="col-md-12 text-center" id="predict_result">
+                <p>No results yet!</p>
+            </div>
+        </div>
+        <div class="row mt-5 p-4">
+            <div class="col-md-12 text-center">
+                <h4 class="text-primary">Results</h4>
+            </div>
+            <div class="col-md-12 text-center" id="results">
+                <p>No results yet!</p>
+            </div>
+        </div>` :
+        `<div class="container mt-4 pt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Training</h3>
+                <table id="tabla" class="table table-striped table-hover" border="1"></table>
+            </div>
+            <div class="col-md-4">
+                <h3>Predict</h3>
+                <select name="effect" class="form-select" id="effect_dropdown"></select>
+            </div>
+            <div class="col-md-4">
+                <h3>When</h3>
+                <div id = "events"></div><br>
+                <button type="button" onclick="predict()" class="btn btn-primary">PREDICT!</button>
+            </div>
+        </div>
+        <div class="row mt-5 p-4">
+            <div class="col-md-12 text-center">
+                <h3 class="text-primary">Result</h3>
+                <div class="display-1 " id="predict_result"></div>
+            </div>
+        </div>
+    </div>`
 }
 
 var contentFile = null
@@ -28,19 +89,19 @@ const readFileContent = (event) => {
         const reader = new FileReader();
         reader.onload = (e) => {
             contentFile = parseCSV(e.target.result);
-            document.getElementById('actions').innerHTML = `<h3>Actions</h3><button type="button" onclick="train()" class="btn btn-primary">Train</button>`
+            const modelSelect = getSelectedOption()
+            models[modelSelect].reset()
+            sectionResults()
+            if(modelSelect === 'Naive Bayes') {
+                document.getElementById('actions').innerHTML = ``
+                models[modelSelect].train(contentFile)
+            }
         };
         reader.readAsText(file, "UTF-8");
     } else {
         alert("Por favor, selecciona un archivo CSV válido.");
     }
 }
-
-window.onload = () => {
-    document.getElementById("data_file").addEventListener("change", readFileContent);
-};
-
-updateModelName()
 
 const models = {
     "Linear Regression":     new LinearRegressionModel(),
@@ -73,3 +134,9 @@ const graphic = () => {
     models[getSelectedOption()].graphic()
     document.getElementById('actions').innerHTML = `<h3>Actions</h3><button type="button" onclick="train()" class="btn btn-primary">Train</button>`
 }
+
+window.onload = () => {
+    document.getElementById("data_file").addEventListener("change", readFileContent);
+};
+
+updateModelName()
