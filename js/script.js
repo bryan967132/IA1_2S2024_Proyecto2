@@ -76,7 +76,7 @@ const sectionResults = () => {
                 id="cluster_count"
                 type="number"
                 class="form-control" 
-                placeholder="Ingrese la cantidad de clusters" 
+                placeholder="Clusters" 
                 style="width: 60%;" 
             />
         </div>
@@ -85,7 +85,7 @@ const sectionResults = () => {
                 id="iterations"
                 type="number"
                 class="form-control" 
-                placeholder="Ingrese la cantidad de clusters" 
+                placeholder="Iterations" 
                 style="width: 60%;" 
             />
         </div>
