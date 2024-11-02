@@ -1,0 +1,11 @@
+clima,temperatura,humedad,viento,juega
+soleado,calor,alta,no,no
+soleado,calor,alta,si,no
+nublado,calor,alta,no,si
+lluvioso,templado,alta,no,si
+lluvioso,frio,normal,no,si
+lluvioso,frio,normal,si,no
+nublado,frio,normal,si,si
+soleado,templado,alta,no,no
+soleado,frio,normal,no,si
+lluvioso,templado,normal,no,si
