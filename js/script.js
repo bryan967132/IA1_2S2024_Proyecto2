@@ -57,7 +57,7 @@ const train = () => {
     models[modelSelect].reset()
     models[modelSelect].train(contentFile)
     if(models[modelSelect].isTrained) {
-        document.getElementById('actions').innerHTML += `<button type="button" onclick="predict()" class="btn btn-primary">Predict</button>`
+        document.getElementById('actions').innerHTML = `<h3>Actions</h3><button type="button" onclick="predict()" class="btn btn-primary">Predict</button>`
     }
 }
 
@@ -65,10 +65,11 @@ const predict = () => {
     const modelSelect = getSelectedOption()
     models[modelSelect].predict()
     if(models[modelSelect].isPredict) {
-        document.getElementById('actions').innerHTML += `<button type="button" onclick="graphic()" class="btn btn-primary">Graphic</button>`
+        document.getElementById('actions').innerHTML = `<h3>Actions</h3><button type="button" onclick="graphic()" class="btn btn-primary">Graphic</button>`
     }
 }
 
 const graphic = () => {
     models[getSelectedOption()].graphic()
+    document.getElementById('actions').innerHTML = `<h3>Actions</h3><button type="button" onclick="train()" class="btn btn-primary">Train</button>`
 }
