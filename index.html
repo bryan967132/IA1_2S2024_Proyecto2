@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://tytusdb.github.io/tytusjs/dist/tytus.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>P2 IA1 2S2024</title>
+</head>
+
+<body>
+    <h1 class="display-1 text-center">Machine Learning</h1>
+    <div class="container mt-4 pt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Predict</h3>
+                <select name="effect" class="form-select" id="models_name" onchange="updateModelName()">
+                    <option value="Linear Regression">Linear Regression</option>
+                    <option value="Polynomial Regression">Polynomial Regression</option>
+                    <option value="Decision Tree">Decision Tree</option>
+                    <option value="Naive Bayes">Naive Bayes</option>
+                    <option value="Neuronal Network">Neuronal Network</option>
+                    <option value="KMeans">KMeans</option>
+                    <option value="K-Nearest Neighbor">K-Nearest Neighbor</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <h3>Choose File</h3>
+                <input type="file" class="form-control" id="data_file" name="data_file" accept=".csv">
+            </div>
+            <div class="col-md-6" id="actions">
+                <h3>Actions</h3>
+                <p>No actions yet!</p>
+            </div>
+        </div>
+        <div class="row mt-5 p-4">
+            <div class="col-md-12 text-center">
+                <h2 class="text-primary" id="model_name"></h2>
+            </div>
+        </div>
+        <div class="row mt-5 p-4">
+            <div class="col-md-12 text-center">
+                <h3 class="text-primary">Result: </h3>
+                <div class="display-1 " id="predict_result"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./js/DecisionTree.js"></script>
+    <script type="text/javascript" src="./js/KMeans.js"></script>
+    <script type="text/javascript" src="./js/KNearestNeighbor.js"></script>
+    <script type="text/javascript" src="./js/LinearRegression.js"></script>
+    <script type="text/javascript" src="./js/NaiveBayes.js"></script>
+    <script type="text/javascript" src="./js/NeuronalNetwork.js"></script>
+    <script type="text/javascript" src="./js/PolynomialRegression.js"></script>
+    <script type="text/javascript" src="./js/script.js"></script>
+</body>
+</html>
